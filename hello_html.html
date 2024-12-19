@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello there</title>
+    <title>Open Redirect Example</title>
 </head>
 <body>
-    <h1 style="text-align: center;">Hello world</h1>
+    <h1>Welcome to Our Website</h1>
+    <p>Click the button below to go to the destination site:</p>
+
+    <!-- Form that accepts user-provided URL -->
+    <form method="GET" action="">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" placeholder="https://example.com">
+        <button type="submit">Redirect</button>
+    </form>
+
+    <?php
+    // Check if 'url' parameter is set
+    if (isset($_GET['url'])) {
+        $url = $_GET['url']; // Unsafe: Directly using user input
+
+        // Redirect to the specified URL
+        echo "<p>Redirecting to: <a href='$url'>$url</a></p>";
+        header("Location: $url");
+        exit();
+    }
+    ?>
 </body>
 </html>
